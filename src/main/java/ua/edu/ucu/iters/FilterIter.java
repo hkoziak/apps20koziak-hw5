@@ -16,8 +16,10 @@ public class FilterIter implements Iterator<Integer> {
     }
 
     @Override
-    public Integer next() throws NoSuchElementException{
-        if (Objects.isNull(value)) throw new NoSuchElementException();
+    public Integer next() throws NoSuchElementException {
+        if (Objects.isNull(value)) {
+            throw new NoSuchElementException();
+        }
         return value;
     }
 

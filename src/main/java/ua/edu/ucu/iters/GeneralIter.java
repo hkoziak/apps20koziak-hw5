@@ -10,7 +10,7 @@ public class GeneralIter implements Iterator<Integer> {
     private int i = 0;
 
     public GeneralIter(int... elements) {
-        for (Integer el: elements) {
+        for (int el: elements) {
             values.add(el);
         }
     }
@@ -21,9 +21,11 @@ public class GeneralIter implements Iterator<Integer> {
     }
 
     @Override
-    public Integer next() throws NoSuchElementException{
+    public Integer next() throws NoSuchElementException {
         int result = (Integer) values.get(i++);
-        if (Objects.isNull(result)) throw new NoSuchElementException();
+        if (Objects.isNull(result)) {
+            throw new NoSuchElementException();
+        }
         return result;
     }
 }
