@@ -9,10 +9,12 @@ public class FlatMapIter implements Iterator<Integer> {
     private IntToIntStreamFunction stamp;
     private GeneralIter addIter;
 
-    public FlatMapIter(Iterator<Integer> genIterator, IntToIntStreamFunction func) {
+    public FlatMapIter(Iterator<Integer> genIterator,
+                       IntToIntStreamFunction func) {
         this.iter = genIterator;
         this.stamp = func;
-        this.addIter = new GeneralIter(); //additional iterator for internal iteration
+        this.addIter = new GeneralIter();
+        //additional iterator for internal iteration
     }
 
     @Override
@@ -21,7 +23,8 @@ public class FlatMapIter implements Iterator<Integer> {
             return true;
         }
         if (iter.hasNext()) {
-            AsIntStream tempStream = (AsIntStream) stamp.applyAsIntStream(iter.next());
+            AsIntStream tempStream =
+                    (AsIntStream) stamp.applyAsIntStream(iter.next());
             addIter = new GeneralIter(tempStream.toArray());
             return true;
         }
