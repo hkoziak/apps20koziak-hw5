@@ -1,6 +1,11 @@
 package ua.edu.ucu.stream;
 
-import ua.edu.ucu.function.*;
+import ua.edu.ucu.function.IntPredicate;
+import ua.edu.ucu.function.IntBinaryOperator;
+import ua.edu.ucu.function.IntConsumer;
+import ua.edu.ucu.function.IntToIntStreamFunction;
+import ua.edu.ucu.function.IntUnaryOperator;
+
 import ua.edu.ucu.iters.FilterIter;
 import ua.edu.ucu.iters.FlatMapIter;
 import ua.edu.ucu.iters.GeneralIter;
@@ -17,12 +22,12 @@ public class AsIntStream implements IntStream {
         return new AsIntStream(new GeneralIter(values));
     }
 
-    private void checkIfEmpty () {
+    private void checkIfEmpty() {
         if (!intIterator.hasNext()) throw new IllegalArgumentException();
     }
 
     @Override
-    public Double average() {
+    public long average() {
         checkIfEmpty();
         int sum = 0;
         int size = 0;
@@ -31,11 +36,11 @@ public class AsIntStream implements IntStream {
             sum += intIterator.next();
         }
         double result = sum / (double) size;
-        return result;
+        return (long) result;
     }
 
     @Override
-    public Integer max() {
+    public int max() {
         checkIfEmpty();
         int max = 0;
         while (intIterator.hasNext()) {
@@ -48,7 +53,7 @@ public class AsIntStream implements IntStream {
     }
 
     @Override
-    public Integer min() {
+    public int min() {
         checkIfEmpty();
         int min = Integer.MAX_VALUE;
         while (intIterator.hasNext()) {
@@ -83,7 +88,7 @@ public class AsIntStream implements IntStream {
 
     @Override
     public void forEach(IntConsumer action) {
-        for (Iterator<Integer> it = intIterator; it.hasNext(); ) {
+        for (Iterator<Integer> it = intIterator; it.hasNext();) {
             Integer el = it.next();
             action.accept(el);
         }
@@ -101,7 +106,7 @@ public class AsIntStream implements IntStream {
 
     @Override
     public int reduce(int identity, IntBinaryOperator op) {
-        for (Iterator<Integer> it = intIterator; it.hasNext(); ) {
+        for (Iterator<Integer> it = intIterator; it.hasNext();) {
             Integer el = it.next();
             identity = op.apply(identity, el);
         }
@@ -111,7 +116,7 @@ public class AsIntStream implements IntStream {
     @Override
     public int[] toArray() {
         ArrayList<Integer> arrayList = new ArrayList<>();
-        for (Iterator<Integer> it = intIterator; it.hasNext(); ) {
+        for (Iterator<Integer> it = intIterator; it.hasNext();) {
             Integer value = it.next();
             arrayList.add(value);
         }
