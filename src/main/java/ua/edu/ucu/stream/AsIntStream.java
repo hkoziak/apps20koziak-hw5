@@ -23,7 +23,9 @@ public class AsIntStream implements IntStream {
     }
 
     private void checkIfEmpty() {
-        if (!intIterator.hasNext()) throw new IllegalArgumentException();
+        if (!intIterator.hasNext()) {
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override
@@ -76,7 +78,7 @@ public class AsIntStream implements IntStream {
     }
 
     @Override
-    public Integer sum() {
+    public int sum() {
         checkIfEmpty();
         return reduce(0, (sum, x) -> sum += x);
     }
@@ -89,7 +91,7 @@ public class AsIntStream implements IntStream {
     @Override
     public void forEach(IntConsumer action) {
         for (Iterator<Integer> it = intIterator; it.hasNext();) {
-            Integer el = it.next();
+            int el = it.next();
             action.accept(el);
         }
     }
@@ -107,7 +109,7 @@ public class AsIntStream implements IntStream {
     @Override
     public int reduce(int identity, IntBinaryOperator op) {
         for (Iterator<Integer> it = intIterator; it.hasNext();) {
-            Integer el = it.next();
+            int el = it.next();
             identity = op.apply(identity, el);
         }
         return identity;
@@ -117,12 +119,12 @@ public class AsIntStream implements IntStream {
     public int[] toArray() {
         ArrayList<Integer> arrayList = new ArrayList<>();
         for (Iterator<Integer> it = intIterator; it.hasNext();) {
-            Integer value = it.next();
+            int value = it.next();
             arrayList.add(value);
         }
         int[] result = new int[arrayList.size()];
         int i = 0;
-        for (Integer el: arrayList) {
+        for (int el: arrayList) {
             result[i++] = el;
         }
         return result;

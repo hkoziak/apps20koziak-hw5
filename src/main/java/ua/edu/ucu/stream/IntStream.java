@@ -26,7 +26,7 @@ public interface IntStream {
 
     int reduce(int identity, IntBinaryOperator op);
 
-    Integer sum();
+    int sum();
 
     int[] toArray();
 }
