@@ -1,7 +1,6 @@
 package ua.edu.ucu.iters;
 
 import ua.edu.ucu.function.IntUnaryOperator;
-
 import java.util.Iterator;
 
 public class MapIter implements Iterator<Integer> {
