@@ -2,6 +2,8 @@ package ua.edu.ucu.iters;
 
 import ua.edu.ucu.function.IntPredicate;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class FilterIter implements Iterator<Integer> {
     private Iterator<Integer> iterator;
@@ -14,7 +16,8 @@ public class FilterIter implements Iterator<Integer> {
     }
 
     @Override
-    public Integer next() {
+    public Integer next() throws NoSuchElementException{
+        if (Objects.isNull(value)) throw new NoSuchElementException();
         return value;
     }
 

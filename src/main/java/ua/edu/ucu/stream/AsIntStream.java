@@ -30,7 +30,8 @@ public class AsIntStream implements IntStream {
             size++;
             sum += intIterator.next();
         }
-        return (double) (sum / size);
+        double result = sum / (double) size;
+        return result;
     }
 
     @Override

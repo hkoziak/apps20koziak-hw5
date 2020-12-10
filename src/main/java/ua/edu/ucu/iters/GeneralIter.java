@@ -2,6 +2,8 @@ package ua.edu.ucu.iters;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class GeneralIter implements Iterator<Integer> {
     private ArrayList values = new ArrayList();
@@ -19,8 +21,9 @@ public class GeneralIter implements Iterator<Integer> {
     }
 
     @Override
-    public Integer next() {
-        return (Integer) values.get(i++);
+    public Integer next() throws NoSuchElementException{
+        int result = (Integer) values.get(i++);
+        if (Objects.isNull(result)) throw new NoSuchElementException();
+        return result;
     }
-
 }
